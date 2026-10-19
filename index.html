@@ -4,15 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>केंद्रप्रमुख समग्र डिजिटल नियंत्रण कक्ष | कन्या नागापूर केंद्र</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/png" href="logo.png">
-  <link rel="apple-touch-icon" href="logo.png">
-  <meta name="theme-color" content="#1e3a8a">
   <meta name="theme-color" content="#1e3a8a">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2997/2997295.png">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
 
   <style>
     :root {
@@ -44,11 +43,10 @@
       font-size: 16px;
     }
 
-    /* मुख्य हेडर */
     .app-header {
       background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       color: white;
-      padding: 18px 16px 12px 16px;
+      padding: 18px 16px 14px 16px;
       text-align: center;
       position: sticky;
       top: 0;
@@ -58,19 +56,18 @@
 
     .app-header h1 {
       margin: 0;
-      font-size: 21px;
+      font-size: 22px;
       font-weight: 800;
       letter-spacing: 0.3px;
     }
 
     .app-header p {
-      margin: 3px 0 0 0;
-      font-size: 14px;
+      margin: 4px 0 0 0;
+      font-size: 14.5px;
       font-weight: 500;
       opacity: 0.95;
     }
 
-    /* नेव्हिगेशन टॅब्स */
     .tab-nav {
       display: flex;
       background: #ffffff;
@@ -78,7 +75,7 @@
       overflow-x: auto;
       scrollbar-width: none;
       position: sticky;
-      top: 73px;
+      top: 74px;
       z-index: 99;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
@@ -88,7 +85,7 @@
     .tab-btn {
       flex: 1;
       min-width: 140px;
-      padding: 12px 10px;
+      padding: 13px 10px;
       border: none;
       background: transparent;
       font-size: 15px;
@@ -127,7 +124,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* सर्च बार */
     .search-box {
       margin-bottom: 18px;
     }
@@ -149,7 +145,6 @@
       box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
     }
 
-    /* १४ शाळांचे मोठे फोटो-बॉक्स ग्रीड */
     .schools-photo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -173,7 +168,6 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.12);
     }
 
-    /* शाळेचा कव्हर फोटो */
     .card-cover-photo {
       width: 100%;
       height: 160px;
@@ -207,7 +201,6 @@
       font-weight: 700;
     }
 
-    /* कार्डमधील माहिती - मोठा फॉन्ट */
     .card-body {
       padding: 15px;
       flex: 1;
@@ -217,7 +210,7 @@
     }
 
     .school-name-text {
-      font-size: 17.5px;
+      font-size: 18px;
       font-weight: 800;
       color: var(--primary);
       margin: 0 0 8px 0;
@@ -225,9 +218,9 @@
     }
 
     .school-meta-line {
-      font-size: 15px;
+      font-size: 15.5px;
       color: var(--text);
-      margin-bottom: 5px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -248,7 +241,6 @@
       border: 1px solid #cbd5e1;
     }
 
-    /* कार्डवरील बटणे */
     .card-bottom-actions {
       display: flex;
       gap: 8px;
@@ -259,7 +251,7 @@
 
     .btn-card-act {
       flex: 1;
-      padding: 7px 10px;
+      padding: 8px 10px;
       font-size: 14px;
       font-weight: 700;
       border-radius: 6px;
@@ -277,7 +269,7 @@
     .btn-c-wa { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
     .btn-c-view { background: #faf5ff; color: #7e22ce; border-color: #e9d5ff; }
 
-    /* ==================== पॉप-अप (Modal) ==================== */
+    /* Modal Styling */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -313,7 +305,7 @@
 
     .modal-school-title {
       margin: 0;
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 800;
       color: var(--primary);
       line-height: 1.3;
@@ -445,7 +437,6 @@
     .tag-yes { background: #dcfce7; color: #166534; }
     .tag-info { background: #dbeafe; color: #1e40af; }
 
-    /* इतर विभागांचे कार्ड्स */
     .generic-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -457,14 +448,14 @@
 
     .generic-card h3 {
       margin: 0 0 6px 0;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 800;
       color: var(--primary);
     }
 
     .generic-card p {
       margin: 0 0 12px 0;
-      font-size: 14.5px;
+      font-size: 15px;
       color: var(--muted);
     }
 
@@ -511,13 +502,11 @@
 </head>
 <body>
 
-  <!-- १. मुख्य हेडर -->
   <div class="app-header">
     <h1>केंद्रप्रमुख समग्र डिजिटल नियंत्रण कक्ष</h1>
     <p>समूह साधन केंद्र कन्या नागापूर | ता. परळी वै. जि. बीड</p>
   </div>
 
-  <!-- २. ५ मुख्य विभागांचे नेव्हिगेशन टॅब्स -->
   <div class="tab-nav">
     <button class="tab-btn active" onclick="switchSection('sec1', this)">१. शाळा व संपर्क</button>
     <button class="tab-btn" onclick="switchSection('sec2', this)">२. शिक्षक वृंद</button>
@@ -528,7 +517,6 @@
 
   <div class="container">
 
-    <!-- विभाग १: १४ शाळांचे मोठे फोटो-कार्ड्स -->
     <div id="sec1" class="dashboard-section active">
       <div class="search-box">
         <input type="text" id="schoolSearch" onkeyup="filterSchools()" placeholder="🔍 शाळेचे नाव, मुख्याध्यापक किंवा यु-डायस शोधा...">
@@ -537,7 +525,6 @@
       <div class="schools-photo-grid" id="schoolsGridContainer"></div>
     </div>
 
-    <!-- विभाग २: शिक्षक वृंद -->
     <div id="sec2" class="dashboard-section">
       <div class="generic-card">
         <h3>शिक्षक प्रोफाइल व स्टाफ व्यवस्थापन</h3>
@@ -548,7 +535,6 @@
       </div>
     </div>
 
-    <!-- विभाग ३: पट व संचमान्यता -->
     <div id="sec3" class="dashboard-section">
       <div class="generic-card">
         <h3>शाळा भेट व संचमान्यता पट पडताळणी प्रपत्र</h3>
@@ -559,7 +545,6 @@
       </div>
     </div>
 
-    <!-- विभाग ४: भौतिक व आयसीटी -->
     <div id="sec4" class="dashboard-section">
       <div class="generic-card">
         <h3>शाळांची भौतिक व डिजिटल संसाधने</h3>
@@ -567,7 +552,6 @@
       </div>
     </div>
 
-    <!-- विभाग ५: शासकीय पोर्टल्स -->
     <div id="sec5" class="dashboard-section">
       <div class="generic-card">
         <h3>सरल (Student Portal)</h3>
@@ -583,7 +567,7 @@
 
   </div>
 
-  <!-- पॉप-अप: शाळेची संपूर्ण कुंडली व PDF कार्ड -->
+  <!-- शाळेची संपूर्ण कुंडली पॉप-अप -->
   <div class="modal-overlay" id="schoolModal" onclick="closeModalOnOutside(event)">
     <div class="modal-window">
       
@@ -725,7 +709,6 @@
   </div>
 
   <script>
-    // केंद्रातील १४ शाळांची कुंडली डेटाबेस (इंग्रजी अंकांसह अचूक ऑब्जेक्ट)
     var schoolsDossier = [
       {
         name: "जि.प.कें.प्रा.शाळा कन्या नागापूर",
@@ -981,9 +964,9 @@
       }
     ];
 
-    // १४ शाळांचे फोटो-बॉक्सेस स्क्रीनवर तयार करणे
     function renderPhotoBoxes(list) {
       var grid = document.getElementById('schoolsGridContainer');
+      if (!grid) return;
       var html = '';
 
       for (var i = 0; i < list.length; i++) {
@@ -1011,7 +994,6 @@
       grid.innerHTML = html;
     }
 
-    // सर्च बारने शाळा शोधणे
     function filterSchools() {
       var q = document.getElementById('schoolSearch').value.toLowerCase();
       var filtered = schoolsDossier.filter(function(s) {
@@ -1020,7 +1002,6 @@
       renderPhotoBoxes(filtered);
     }
 
-    // शाळेचा पॉप-अप (Modal) उघडणे
     function openSchoolModal(index) {
       var s = schoolsDossier[index];
       if (!s) return;
@@ -1080,10 +1061,18 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // पेज उघडताच शाळा लोड करणे
     window.onload = function() {
       renderPhotoBoxes(schoolsDossier);
     };
+  </script>
+
+  <!-- PWA Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('data:text/javascript;charset=utf-8,' + encodeURIComponent("self.addEventListener('fetch', function(e){});"));
+      });
+    }
   </script>
 
 </body>
