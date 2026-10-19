@@ -1,24 +1,32 @@
 {
-  "name": "केंद्रप्रमुख डिजिटल नियंत्रण कक्ष",
+  "id": "kendra-niyantran-app",
+  "name": "केंद्रप्रमुख समग्र डिजिटल नियंत्रण कक्ष",
   "short_name": "केंद्र नियंत्रण",
   "description": "समूह साधन केंद्र कन्या नागापूर डिजिटल डॅशबोर्ड",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#1e3a8a",
   "theme_color": "#1e3a8a",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "./logo.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "logo.png",
+      "src": "./logo.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "./logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
