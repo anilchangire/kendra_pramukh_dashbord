@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>केंद्रप्रमुख डिजिटल नियंत्रण कक्ष | कन्या नागापूर केंद्र</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #2563eb;
+      --secondary: #0f766e;
+      --accent: #d97706;
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.06), 0 2px 4px -2px rgba(0,0,0,0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Mukta', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      margin: 0;
+      padding: 0;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Sticky Header */
+    .app-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 16px 16px 12px 16px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .app-header h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .app-header p {
+      margin: 2px 0 0 0;
+      font-size: 13px;
+      opacity: 0.92;
+    }
+
+    /* 5 Main Section Navigation Tabs */
+    .tab-nav {
+      display: flex;
+      background: #ffffff;
+      border-bottom: 2px solid var(--border);
+      overflow-x: auto;
+      scrollbar-width: none;
+      position: sticky;
+      top: 68px;
+      z-index: 99;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    }
+
+    .tab-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 130px;
+      padding: 12px 10px;
+      border: none;
+      background: transparent;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      text-align: center;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 14px;
+    }
+
+    /* Section Wrapper */
+    .dashboard-section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .dashboard-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-banner {
+      background: #fff;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Search Bar */
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      background: #fff;
+      margin-bottom: 12px;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    /* Cards Grid */
+    .grid-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .content-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .content-card h3 {
+      margin: 0 0 6px 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .card-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .card-meta div {
+      margin-bottom: 3px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge-udise { background: #f1f5f9; color: #334155; }
+    .badge-success { background: #dcfce7; color: #166534; }
+    .badge-primary { background: #dbeafe; color: #1e40af; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+
+    /* Button Actions */
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      border-top: 1px dashed var(--border);
+      padding-top: 10px;
+    }
+
+    .btn-action {
+      flex: 1;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-call { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+    .btn-wa { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+    .btn-open { background: var(--primary); color: white; }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px 6px;
+      text-align: center;
+    }
+
+    th {
+      background: #f8fafc;
+      font-weight: 700;
+    }
+
+    @media (max-width: 600px) {
+      .app-header h1 { font-size: 18px; }
+      .container { padding: 10px; }
+      .tab-btn { min-width: 110px; font-size: 12.5px; padding: 10px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- १. मुख्य हेडर -->
+  <div class="app-header">
+    <h1>केंद्रप्रमुख समग्र डिजिटल नियंत्रण कक्ष</h1>
+    <p>समूह साधन केंद्र कन्या नागापूर | ता. परळी वै. जि. बीड</p>
+  </div>
+
+  <!-- २. ५ मुख्य विभागांचे नेव्हिगेशन टॅब्स -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchSection('sec1', this)">१. शाळा व संपर्क</button>
+    <button class="tab-btn" onclick="switchSection('sec2', this)">२. शिक्षक वृंद</button>
+    <button class="tab-btn" onclick="switchSection('sec3', this)">३. पट व संचमान्यता</button>
+    <button class="tab-btn" onclick="switchSection('sec4', this)">४. भौतिक व आयसीटी</button>
+    <button class="tab-btn" onclick="switchSection('sec5', this)">५. शासकीय पोर्टल्स</button>
+  </div>
+
+  <div class="container">
+
+    <!-- ==================== विभाग १: शाळा व प्रशासकीय कक्ष ==================== -->
+    <div id="sec1" class="dashboard-section active">
+      <div class="section-banner">
+        <span>🏫 केंद्र कन्या नागापूर: शाळांची यादी व थेट संपर्क (एकूण १४ शाळा)</span>
+      </div>
+      
+      <input type="text" id="schoolSearch" class="search-input" onkeyup="filterSchools()" placeholder="🔍 शाळेचे नाव, मुख्याध्यापक किंवा यु-डायस कोड शोधा...">
+
+      <div class="grid-layout" id="schoolsCardGrid">
+        <!-- JavaScript द्वारे शाळांची कार्ड्स लोड होतील -->
+      </div>
+    </div>
+
+    <!-- ==================== विभाग २: शिक्षक वृंद व्यवस्थापन ==================== -->
+    <div id="sec2" class="dashboard-section">
+      <div class="section-banner">
+        <span>👨‍🏫 शिक्षक वृंद प्रोफाइल, पात्रता व तज्ञ कौशल्ये</span>
+        <button class="btn-action btn-open" style="flex:none; padding:6px 14px;" onclick="alert('टप्पा ३ मध्ये थेट Google Sheet सिंक होईल!')">
+          🔄 डेटा सिंक करा
+        </button>
+      </div>
+
+      <div style="background:#fff; padding:14px; border-radius:10px; border:1px solid var(--border); margin-bottom:14px;">
+        <label style="font-weight:700; font-size:13.5px;">शाळा निवडा:</label>
+        <select id="staffSchoolSelect" style="width:100%; padding:8px; margin-top:4px; font-weight:600;" onchange="loadStaffForSelectedSchool()">
+          <!-- शाळांची यादी -->
+        </select>
+      </div>
+
+      <div class="grid-layout" id="staffCardGrid">
+        <!-- शिक्षकांची प्रोफाइल कार्ड्स -->
+      </div>
+    </div>
+
+    <!-- ==================== विभाग ३: विद्यार्थी पट व संचमान्यता ==================== -->
+    <div id="sec3" class="dashboard-section">
+      <div class="section-banner">
+        <span>📑 शाळा भेट, पट पडताळणी प्रपत्र व हमीपत्र</span>
+      </div>
+
+      <div class="grid-layout">
+        <div class="content-card">
+          <h3>शाळा भेट व संचमान्यता पट पडताळणी प्रपत्र</h3>
+          <p class="card-meta">वर्गवार पट, उपस्थिती, ७ मुद्दे तपासणी व तफावत ऑटो-कॅल्क्युलेटर.</p>
+          <div class="card-actions">
+            <!-- आधी तयार केलेल्या लाईव्ह फॉर्मची लिंक येथे जोडली आहे -->
+            <a href="https://anilchangire.github.io/sanch_manyata_my.school/" target="_blank" class="btn-action btn-open">
+              🚀 फॉर्म उघडा / भरा
+            </a>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h3>मुख्याध्यापकांचे अधिकृत हमीपत्र / शपथपत्र</h3>
+          <p class="card-meta">संचमान्यता २०२६-२७ साठी शाळास्तरावरून द्यावयाचे अधिकृत हमीपत्र.</p>
+          <div class="card-actions">
+            <a href="https://anilchangire.github.io/sanch_manyata_my.school/#undertaking" target="_blank" class="btn-action btn-open">
+              ✍️ हमीपत्र जनरेट करा
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== विभाग ४: डिजिटल संसाधने व भौतिक सुविधा ==================== -->
+    <div id="sec4" class="dashboard-section">
+      <div class="section-banner">
+        <span>🖥️ डिजिटल पॅनल, आयसीटी लॅब व भौतिक पायाभूत सुविधा</span>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>शाळा</th>
+              <th>खोल्या</th>
+              <th>RO पाणी</th>
+              <th>स्वच्छतागृह</th>
+              <th>वीज</th>
+              <th>डिजिटल स्क्रीन / IFP</th>
+              <th>इंटरनेट</th>
+            </tr>
+          </thead>
+          <tbody id="infraTableBody">
+            <!-- तक्ता भरेल -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================== विभाग ५: शासकीय वेब पोर्टल्स व थेट दुवे ==================== -->
+    <div id="sec5" class="dashboard-section">
+      <div class="section-banner">
+        <span>🌐 शासकीय वेब प्रणाली व अधिकृत लॉगिन थेट दालन</span>
+      </div>
+
+      <div class="grid-layout">
+        <div class="content-card">
+          <h3>सरल पोर्टल (Student Portal)</h3>
+          <p class="card-meta">विद्यार्थी आधार प्रमाणीकरण, प्रमोशन व संचमान्यता प्रणाली.</p>
+          <div class="card-actions">
+            <a href="https://student.maharashtra.gov.in" target="_blank" class="btn-action btn-open">🔗 लॉगिन करा</a>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h3>यूडायस+ (UDISE+ Portal)</h3>
+          <p class="card-meta">शाळा, शिक्षक व विद्यार्थी प्रोफाइल माहिती अद्ययावत करणे.</p>
+          <div class="card-actions">
+            <a href="https://udiseplus.gov.in" target="_blank" class="btn-action btn-open">🔗 लॉगिन करा</a>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h3>शालेय पोषण आहार (MDM Portal)</h3>
+          <p class="card-meta">दैनिक व मासिक पोषण आहार माहिती व तांदूळ साठा नोंद.</p>
+          <div class="card-actions">
+            <a href="https://education.maharashtra.gov.in/mdm/" target="_blank" class="btn-action btn-open">🔗 लॉगिन करा</a>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h3>दीक्षा पोर्टल (DIKSHA Portal)</h3>
+          <p class="card-meta">डिजिटल पाठ्यपुस्तके व शिक्षक प्रशिक्षण उपक्रम.</p>
+          <div class="card-actions">
+            <a href="https://diksha.gov.in" target="_blank" class="btn-action btn-open">🔗 उघडा</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // १. केंद्रातील १४ शाळांची मास्टर माहिती
+    var schoolsMaster = [
+      { udise: "27270804001", name: "जि.प.कें.प्रा.शाळा कन्या नागापूर", hm: "श्री.बी.डी.राठोड", phone: "98XXXXXXXX", rooms: 4, water: "होय", toilet: "होय", power: "होय", ifp: "4K IFP पॅनल", net: "ब्रॉडबँड" },
+      { udise: "27270804002", name: "जि.प.मा.शाळा नागापूर", hm: "श्री.ए.बी. गायकवाड", phone: "98XXXXXXXX", rooms: 6, water: "होय", toilet: "होय", power: "होय", ifp: "स्मार्ट टीव्ही", net: "फायबर" },
+      { udise: "27270804101", name: "जि.प.प्रा.शाळा डाबी", hm: "श्री.एम.आर.फड", phone: "98XXXXXXXX", rooms: 2, water: "होय", toilet: "होय", power: "होय", ifp: "स्मार्ट टीव्ही", net: "हॉटस्पॉट" },
+      { udise: "27270804701", name: "जि.प.प्रा.शाळा डाबी तांडा", hm: "श्री.एस.जी.फड", phone: "98XXXXXXXX", rooms: 2, water: "होय", toilet: "होय", power: "होय", ifp: "स्मार्ट टीव्ही", net: "मोबाईल" },
+      { udise: "27270804301", name: "जि.प.प्रा.शाळा वानटाकळी", hm: "श्री.आर.बी.जोशी", phone: "98XXXXXXXX", rooms: 5, water: "होय", toilet: "होय", power: "होय", ifp: "IFP पॅनल", net: "ब्रॉडबँड" },
+      { udise: "27270804302", name: "जि.प.प्रा.शाळा वानटाकळी तांडा", hm: "श्री.एम.एन.जाधव", phone: "98XXXXXXXX", rooms: 2, water: "होय", toilet: "होय", power: "होय", ifp: "स्मार्ट टीव्ही", net: "मोबाईल" },
+      { udise: "27280100401", name: "जि.प.प्रा.शाळा एकबाली तांडा", hm: "श्री.के.बी.माडजे", phone: "98XXXXXXXX", rooms: 2, water: "होय", toilet: "होय", power: "होय", ifp: "स्मार्ट टीव्ही", net: "मोबाईल" },
+      { udise: "27270804601", name: "जि.प.प्रा.शाळा दौनापुर तांडा", hm: "श्रीमती एस.के.लाड", phone: "98XXXXXXXX", rooms: 2, water: "होय", toilet: "होय", power: "होय", ifp: "स्मार्ट टीव्ही", net: "मोबाईल" },
+      { udise: "27270804201", name: "जि.प.प्रा.शाळा दौनापूर", hm: "श्री.आर.टी.मंत्रे", phone: "98XXXXXXXX", rooms: 4, water: "होय", toilet: "होय", power: "होय", ifp: "स्मार्ट टीव्ही", net: "उपलब्ध" },
+      { udise: "27270804801", name: "जि.प.प्रा.शाळा लिंबूटा तांडा", hm: "श्री.एम.बी.बडगिरे", phone: "98XXXXXXXX", rooms: 2, water: "होय", toilet: "होय", power: "होय", ifp: "स्मार्ट टीव्ही", net: "मोबाईल" },
+      { udise: "27270804401", name: "जि.प.प्रा.शाळा बहादुरवाडी", hm: "श्रीमती ए.डी.चिद्दरवार", phone: "98XXXXXXXX", rooms: 2, water: "होय", toilet: "होय", power: "होय", ifp: "स्मार्ट टीव्ही", net: "मोबाईल" },
+      { udise: "27270804004", name: "संत तुकाराम प्राथमिक विद्यालय नागापूर", hm: "श्री.एन.पी.मुंडे", phone: "98XXXXXXXX", rooms: 8, water: "होय (RO)", toilet: "होय", power: "सौर+वीज", ifp: "२ IFP पॅनल", net: "फायबर वायफाय" },
+      { udise: "27270804003", name: "रमाबाई प्राथमिक शाळा नागापूर", hm: "श्रीमती एस.एस.बनसोडे", phone: "98XXXXXXXX", rooms: 2, water: "होय", toilet: "होय", power: "होय", ifp: "स्मार्ट टीव्ही", net: "उपलब्ध" },
+      { udise: "27270804202", name: "बालाघाट विद्यालय दौनापूर", hm: "श्री.एम.व्ही.कराड", phone: "98XXXXXXXX", rooms: 6, water: "होय", toilet: "होय", power: "होय", ifp: "डिजिटल स्क्रीन", net: "ब्रॉडबँड" }
+    ];
+
+    // २. तात्पुरता शिक्षक डेमो डेटा
+    var staffSample = [
+      { udise: "27270804001", name: "श्री.बी.डी.राठोड", desig: "मुख्याध्यापक", phone: "98XXXXXXXX", edu: "B.A., D.T.Ed.", cls: "इ. १ ते ४", sub: "सर्व", exp: "FLN तज्ञ" },
+      { udise: "27270804004", name: "श्री.एन.पी.मुंडे", desig: "मुख्याध्यापक", phone: "98XXXXXXXX", edu: "M.A., B.Ed.", cls: "इ. ५ ते १०", sub: "इतिहास, मराठी", exp: "प्रशासन, शिष्यवृत्ती" }
+    ];
+
+    // विभाग बदलणे (Tab Switch)
+    function switchSection(secId, btnElem) {
+      var sections = document.querySelectorAll('.dashboard-section');
+      sections.forEach(function(s) { s.classList.remove('active'); });
+
+      var btns = document.querySelectorAll('.tab-btn');
+      btns.forEach(function(b) { b.classList.remove('active'); });
+
+      document.getElementById(secId).classList.add('active');
+      btnElem.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // शाळा कार्ड्स लोड करणे
+    function renderSchoolsCards(list) {
+      var grid = document.getElementById('schoolsCardGrid');
+      var html = '';
+
+      for (var i = 0; i < list.length; i++) {
+        var s = list[i];
+        html += '<div class="content-card">' +
+          '<div>' +
+            '<h3>' + s.name + '</h3>' +
+            '<div class="card-meta">' +
+              '<div><b>मुख्याध्यापक:</b> ' + s.hm + '</div>' +
+              '<div><b>यु-डायस:</b> <span class="badge badge-udise">' + s.udise + '</span></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card-actions">' +
+            '<a href="tel:' + s.phone + '" class="btn-action btn-call">📞 कॉल</a>' +
+            '<a href="https://wa.me/91' + s.phone + '" target="_blank" class="btn-action btn-wa">💬 व्हॉट्सॲप</a>' +
+          '</div>' +
+        '</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    // शाळा सर्च फिल्टर
+    function filterSchools() {
+      var q = document.getElementById('schoolSearch').value.toLowerCase();
+      var filtered = schoolsMaster.filter(function(s) {
+        return s.name.toLowerCase().includes(q) || s.hm.toLowerCase().includes(q) || s.udise.includes(q);
+      });
+      renderSchoolsCards(filtered);
+    }
+
+    // भौतिक सुविधा तक्ता भरणे
+    function renderInfraTable() {
+      var tbody = document.getElementById('infraTableBody');
+      var html = '';
+
+      for (var i = 0; i < schoolsMaster.length; i++) {
+        var s = schoolsMaster[i];
+        html += '<tr>' +
+          '<td style="text-align:left; font-weight:700;">' + s.name.split(',')[0] + '</td>' +
+          '<td>' + s.rooms + '</td>' +
+          '<td><span class="badge badge-success">' + s.water + '</span></td>' +
+          '<td><span class="badge badge-success">' + s.toilet + '</span></td>' +
+          '<td><span class="badge badge-success">' + s.power + '</span></td>' +
+          '<td><span class="badge badge-primary">' + s.ifp + '</span></td>' +
+          '<td>' + s.net + '</td>' +
+        '</tr>';
+      }
+      tbody.innerHTML = html;
+    }
+
+    // शिक्षक विभाग शाळा ड्रॉपडाऊन
+    function initStaffSelector() {
+      var sel = document.getElementById('staffSchoolSelect');
+      sel.innerHTML = '';
+      for (var i = 0; i < schoolsMaster.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = schoolsMaster[i].udise;
+        opt.text = (i + 1) + ". " + schoolsMaster[i].name;
+        sel.appendChild(opt);
+      }
+      loadStaffForSelectedSchool();
+    }
+
+    function loadStaffForSelectedSchool() {
+      var curUdise = document.getElementById('staffSchoolSelect').value;
+      var grid = document.getElementById('staffCardGrid');
+      grid.innerHTML = '';
+
+      var matched = staffSample.filter(function(st) { return st.udise === curUdise; });
+
+      if (matched.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1; background:#fff; padding:25px; text-align:center; border-radius:8px; border:1px dashed var(--border); color:var(--muted);">' +
+          'या शाळेतील शिक्षकांची माहिती गुगल फॉर्मद्वारे संकलित झाल्यावर येथे थेट दिसेल.' +
+        '</div>';
+        return;
+      }
+
+      var html = '';
+      for (var i = 0; i < matched.length; i++) {
+        var t = matched[i];
+        html += '<div class="content-card">' +
+          '<div>' +
+            '<h3>' + t.name + '</h3>' +
+            '<div class="card-meta">' +
+              '<div><b>पदनाम:</b> <span class="badge badge-primary">' + t.desig + '</span></div>' +
+              '<div><b>पात्रता:</b> ' + t.edu + '</div>' +
+              '<div><b>वर्ग व विषय:</b> ' + t.cls + ' (' + t.sub + ')</div>' +
+              '<div><b>तज्ञ विषय:</b> <span class="badge badge-warning">' + t.exp + '</span></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card-actions">' +
+            '<a href="tel:' + t.phone + '" class="btn-action btn-call">📞 कॉल</a>' +
+            '<a href="https://wa.me/91' + t.phone + '" target="_blank" class="btn-action btn-wa">💬 व्हॉट्सॲप</a>' +
+          '</div>' +
+        '</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    window.onload = function() {
+      renderSchoolsCards(schoolsMaster);
+      renderInfraTable();
+      initStaffSelector();
+    };
+  </script>
+
+</body>
+</html>
